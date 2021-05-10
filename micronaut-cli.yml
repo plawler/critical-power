@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.routescoop
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [annotation-api, app-name, aws-lambda, aws-lambda-custom-runtime, aws-v2-sdk, graalvm, gradle, java, junit, logback, readme, shade, yaml]

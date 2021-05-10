@@ -1,0 +1,44 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "6.1.0"
+    // https://github.com/micronaut-projects/micronaut-gradle-plugin/blob/master/README.md
+    id("io.micronaut.application") version "1.4.2"
+}
+
+version = "0.1"
+group = "com.routescoop"
+
+repositories {
+    mavenCentral()
+}
+
+micronaut {
+    runtime("lambda")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.routescoop.*")
+    }
+}
+
+dependencies {
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("javax.annotation:javax.annotation-api")
+    compileOnly("org.graalvm.nativeimage:svm")
+    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.aws:micronaut-aws-sdk-v2")
+    implementation("io.micronaut.aws:micronaut-function-aws-custom-runtime")
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+    runtimeOnly("ch.qos.logback:logback-classic")
+    testImplementation("io.micronaut:micronaut-http-client")
+}
+
+application {
+    mainClass.set("io.micronaut.function.aws.runtime.MicronautLambdaRuntime")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("8")
+    targetCompatibility = JavaVersion.toVersion("8")
+}
+
+
+
